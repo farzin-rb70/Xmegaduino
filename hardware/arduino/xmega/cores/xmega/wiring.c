@@ -389,10 +389,21 @@ static void initAdc( ADC_t* adc ) {
                      ;
 
         // TODO: What should we use as analog ref?
+
+// Older XMega MCUs use ADC_REFSEL_VCC_gc variable for Vcc/1.6 internal analog reference.
+#if defined(ADC_REFSEL_VCC_gc)
         adc->REFCTRL = ADC_REFSEL_VCC_gc   // VCC/1.6 analog ref
                      | 0 << ADC_BANDGAP_bp // bandgap not enabled
                      | 0 << ADC_TEMPREF_bp // temerature reference not enabled
                      ;
+#endif
+// Newer XMegas refer to the same analog reference as ADC_REFSEL_INTVCC_gc.
+#if defined(ADC_REFSEL_INTVCC_gc)
+        adc->REFCTRL = ADC_REFSEL_INTVCC_gc   // VCC/1.6 analog ref
+                     | 0 << ADC_BANDGAP_bp // bandgap not enabled
+                     | 0 << ADC_TEMPREF_bp // temerature reference not enabled
+                     ;
+#endif
 
         adc->EVCTRL = 0 << ADC_SWEEP_gp // Have to set it to something, so sweep only channel 0.
                     | 0 << ADC_EVSEL_gp // Have to set it to something, so event channels 0123.
