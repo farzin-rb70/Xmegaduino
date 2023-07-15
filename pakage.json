@@ -1,0 +1,6 @@
+{
+    "name": "framework-arduinoxmega",
+    "description": "Arduino Wiring-based Framework (xmega Core)",
+    "url": "https://github.com/farzin-rb70/Xmegaduino",
+    "version": "1.0.0-dev"
+}
